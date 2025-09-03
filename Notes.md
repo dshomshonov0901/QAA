@@ -33,6 +33,7 @@ CcoxCrh_comrhy114_EO_adult_2_htseqcounts_[forORrev]stranded.txt
 
 cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -o Crh_rhy52_EO_6cm_1_trimmed.fastq.gz Crh_rhy52_EO_6cm_1.fastq.gz
 What proportion of reads (both R1 and R2) were trimmed?
+
 === Summary ===
 
 Total reads processed:              40,310,122
@@ -43,3 +44,14 @@ Total basepairs processed: 6,046,518,300 bp
 Total written (filtered):  6,019,425,557 bp (99.6%)
 
 cutadapt -a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o Crh_rhy52_EO_6cm_2_trimmed.fastq.gz Crh_rhy52_EO_6cm_2.fastq.gz
+
+=== Summary ===
+
+Total reads processed:              40,310,122
+Reads with adapters:                 1,819,245 (4.5%)
+Reads written (passing filters):    40,310,122 (100.0%)
+
+Total basepairs processed: 6,046,518,300 bp
+Total written (filtered):  6,037,338,120 bp (99.8%)
+
+
