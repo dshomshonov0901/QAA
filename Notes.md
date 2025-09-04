@@ -48,10 +48,11 @@ cutadapt -a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o Crh_rhy52_EO_6cm_2_trimmed.fast
 === Summary ===
 
 Total reads processed:              40,310,122
-Reads with adapters:                 1,819,245 (4.5%)
+Reads with adapters:                 2,454,857 (6.1%)
 Reads written (passing filters):    40,310,122 (100.0%)
 
 Total basepairs processed: 6,046,518,300 bp
-Total written (filtered):  6,037,338,120 bp (99.8%)
+Total written (filtered):  6,018,200,529 bp (99.5%)
+
 
 
