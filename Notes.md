@@ -78,4 +78,25 @@ Reads written (passing filters):     7,137,274 (100.0%)
 Total basepairs processed: 1,070,591,100 bp
 Total written (filtered):  1,036,101,294 bp (96.8%)
 
+trimmomatic PE -threads 8 -phred33 \
+    Crh_rhy52_EO_6cm_1_trimmed.fastq.gz Crh_rhy52_EO_6cm_2_trimmed.fastq.gz \                  # input files
+    Crh_rhy52_EO_6cm_1_trimmed.paired.fastq.gz Crh_rhy52_EO_6cm_1_trimmed.unpaired.fastq.gz \  # outputs for R1
+    Crh_rhy52_EO_6cm_2_trimmed.paired.fastq.gz Crh_rhy52_EO_6cm_2_trimmed.unpaired.fastq.gz \  # outputs for R2
+    HEADCROP:8 \
+    LEADING:3 \
+    TRAILING:3 \
+    SLIDINGWINDOW:5:15 \
+    MINLEN:35
+
+trimmomatic PE -threads 8 -phred33 \
+    CcoxCrh_comrhy114_EO_adult_1_trimmed.fastq.gz CcoxCrh_comrhy114_EO_adult_2_trimmed.fastq.gz \                  # input files
+    CcoxCrh_comrhy114_EO_adult_1_trimmed.paired.fastq.gz CcoxCrh_comrhy114_EO_adult_1_trimmed.unpaired.fastq.gz \  # outputs for R1
+     CcoxCrh_comrhy114_EO_adult_2_trimmed.paired.fastq.gz CcoxCrh_comrhy114_EO_adult_2_trimmed.unpaired.fastq.gz  \  # outputs for R2
+    HEADCROP:8 \
+    LEADING:3 \
+    TRAILING:3 \
+    SLIDINGWINDOW:5:15 \
+    MINLEN:35
+
+
 
