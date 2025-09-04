@@ -37,7 +37,7 @@ What proportion of reads (both R1 and R2) were trimmed?
 === Summary ===
 
 Total reads processed:              40,310,122
-Reads with adapters:                 2,168,281 (5.4%)
+Reads with adapters:                ** 2,168,281 (5.4%)**
 Reads written (passing filters):    40,310,122 (100.0%)
 
 Total basepairs processed: 6,046,518,300 bp
@@ -48,11 +48,34 @@ cutadapt -a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o Crh_rhy52_EO_6cm_2_trimmed.fast
 === Summary ===
 
 Total reads processed:              40,310,122
-Reads with adapters:                 2,454,857 (6.1%)
+Reads with adapters:                ** 2,454,857 (6.1%)**
 Reads written (passing filters):    40,310,122 (100.0%)
 
 Total basepairs processed: 6,046,518,300 bp
 Total written (filtered):  6,018,200,529 bp (99.5%)
 
+cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -o CcoxCrh_comrhy114_EO_adult_1_trimmed.fastq.gz CcoxCrh_comrhy114_EO_adult_1.fastq.gz
+
+=== Summary ===
+
+Total reads processed:               7,137,274
+Reads with adapters:                 1,472,198 (20.6%)
+Reads written (passing filters):     7,137,274 (100.0%)
+
+Total basepairs processed: 1,070,591,100 bp
+Total written (filtered):  1,034,522,675 bp (96.6%)
+
+
+
+cutadapt -a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o CcoxCrh_comrhy114_EO_adult_2_trimmed.fastq.gz CcoxCrh_comrhy114_EO_adult_2.fastq.gz
+
+=== Summary ===
+
+Total reads processed:               7,137,274
+Reads with adapters:                 1,472,661 (20.6%)
+Reads written (passing filters):     7,137,274 (100.0%)
+
+Total basepairs processed: 1,070,591,100 bp
+Total written (filtered):  1,036,101,294 bp (96.8%)
 
 
