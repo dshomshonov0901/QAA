@@ -98,5 +98,42 @@ trimmomatic PE -threads 8 -phred33 \
     SLIDINGWINDOW:5:15 \
     MINLEN:35
 
+trimmed_read_length_plot.py ran with
+python trimmed_read_length_plot.py SRR25630377/CcoxCrh_comrhy114_EO_adult_1_trimmed.paired.fastq.gz   SRR25630377/CcoxCrh_comrhy114_EO_adult_2_trimmed.paired.fastq.gzCcoxCrh_comrhy114_EO_adult_2_trimmed.unpaired.fastq.gz    SRR25630377/CcoxCrh_comrhy114_EO_adult_trimmed_lengths.png
+python trimmed_read_length_plot.py    SRR25630301/Crh_rhy52_EO_6cm_1_trimmed.paired.fastq.gz   SRR25630301/Crh_rhy52_EO_6cm_2_trimmed.paired.fastq.gz   SRR25630301/Crh_rhy52_EO_6cm_trimmed_lengths.png 
+
+using build.stardtabse file from PS8:
+first convert to gtf:
+# install if you don’t have it
+conda install -c bioconda gffread
+
+# convert
+gffread campylomormyrus.gff -T -o campylomormyrus.gtf
+
+sorted with samtools -o to bam file
+
+picard.sh with add or replace read groups
+
+samtools view -h -o campylomormyrus_aligned.sorted.dedup.sam  campylomormyrus_aligned.sorted.dedup.bam 
+
+SRR25630301(Campylomormyrus rhynchophorus):
+Mapped reads: 16705591
+Unmapped reads: 1813
+Total unique reads: 16707404
+and SRR25630377(Campylomormyrus compressirostris x Campylomormyrus rhynchophorus): 
+Mapped reads: 27726
+Unmapped reads: 6991629
+Total unique reads: 7019355
+
+samtools sort -n -o campylomormyrus_aligned.sortedByName.dedup.bam campylomormyrus_aligned.sorted.dedup.bam
+
+htseq-count -f bam -r name -s reverse -i gene_id     campylomormyrus_aligned.sortedByName.dedup.bam     ../QAA/campylomormyrus.gtf > counts_stranded_reverse.txt
+
+htseq-count -f bam -r name -s yes -i gene_id     campylomormyrus_aligned.sortedByName.dedup.bam     ../QAA/campylomormyrus.gtf > counts_stranded_yes.txt
+
+QAA) [dansho@login1 SRR25630301]$ grep -v '^__' counts_stranded_yes.txt | awk '{sum += $2} END {print sum}'
+579836
+(QAA) [dansho@login1 SRR25630301]$ grep -v '^__' counts_stranded_reverse.txt | awk '{sum += $2} END {print sum}'
+10681434
 
 
