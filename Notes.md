@@ -1,3 +1,4 @@
+###Part 0: Prep
 installed sra tool kit: conda install bioconda::sra-tools
 prefetch SRR25630301
 prefetch SRR25630377
@@ -9,6 +10,8 @@ Crh_rhy52_EO_6cm_1.fastq.gz
 Crh_rhy52_EO_6cm_1_htseqcounts_[forORrev]stranded.txt
 CcoxCrh_comrhy114_EO_adult_2.fastq.gz
 CcoxCrh_comrhy114_EO_adult_2_htseqcounts_[forORrev]stranded.txt
+
+###Part 1
 
 <img width="253" height="57" alt="Screenshot 2025-09-03 at 2 36 26 PM" src="https://github.com/user-attachments/assets/f2e4bf29-c24a-4449-891e-713817ed6f4e" />
 <img width="917" height="659" alt="Screenshot 2025-09-03 at 2 35 55 PM" src="https://github.com/user-attachments/assets/99bc33b2-d9f9-4a2a-afbd-5236b7811102" />
@@ -30,9 +33,12 @@ CcoxCrh_comrhy114_EO_adult_2_htseqcounts_[forORrev]stranded.txt
 <img width="858" height="655" alt="Screenshot 2025-09-03 at 3 05 14 PM" src="https://github.com/user-attachments/assets/f3bf36e7-1089-43e1-88b1-3330e5664b2b" />
 <img width="882" height="651" alt="Screenshot 2025-09-03 at 3 05 25 PM" src="https://github.com/user-attachments/assets/f3caca4c-6b87-4643-b8a9-d7b4a17e95cb" />
 
+###Part 2: Trimming
+
+installed cutadapt --version  5.0
+installed trimmomatic -version 0.39
 
 cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -o Crh_rhy52_EO_6cm_1_trimmed.fastq.gz Crh_rhy52_EO_6cm_1.fastq.gz
-What proportion of reads (both R1 and R2) were trimmed?
 
 === Summary ===
 
@@ -64,7 +70,6 @@ Reads written (passing filters):     7,137,274 (100.0%)
 
 Total basepairs processed: 1,070,591,100 bp
 Total written (filtered):  1,034,522,675 bp (96.6%)
-
 
 
 cutadapt -a AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o CcoxCrh_comrhy114_EO_adult_2_trimmed.fastq.gz CcoxCrh_comrhy114_EO_adult_2.fastq.gz
@@ -104,10 +109,7 @@ python trimmed_read_length_plot.py    SRR25630301/Crh_rhy52_EO_6cm_1_trimmed.pai
 
 using build.stardtabse file from PS8:
 first convert to gtf:
-# install if you don’t have it
 conda install -c bioconda gffread
-
-# convert
 gffread campylomormyrus.gff -T -o campylomormyrus.gtf
 
 sorted with samtools -o to bam file
@@ -116,6 +118,7 @@ picard.sh with add or replace read groups
 
 samtools view -h -o campylomormyrus_aligned.sorted.dedup.sam  campylomormyrus_aligned.sorted.dedup.bam 
 
+count mapped/unmapped script from PS8:
 SRR25630301(Campylomormyrus rhynchophorus):
 Mapped reads: 16705591
 Unmapped reads: 1813
