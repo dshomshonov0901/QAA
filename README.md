@@ -1,46 +1,33 @@
-# RNA-seq Quality Assessment Assignment - Bi 623 (Summer 2025 Assignment/PS 2)
+# RNA-seq Quality Assessment
+## Overall project tasks:
 
-## Overall assignment:
-
-In this assignment, you will process electric organ and/or skeletal muscle RNA-seq reads for a future differential gene expression analysis. We will be completing the differential gene expression analysis in our last bioinformatics assignment of this class. You will learn how to use existing tools for quality assessment and read trimming, compare quality assessments to those created by your own software, and how to align and count reads. Additionally, you will learn how to summarize important information in a high-level report. You should create a cohesive, [well written](https://drive.google.com/drive/u/0/folders/1GorpwubavrvhUtK18PZ7LURXcz0hf0bK) report for your "PI" about what you've learned about/from your data.
-
-Be sure to upload all relevant materials by the deadline and **double check** to be sure that your offline repository is up-to-date with your online repository. Answers to questions should be included in your final, high-level, report as a `pdf`. This pdf should be generated using Rmarkdown and submitted to Canvas as well as GitHub. Be sure to keep a well-organized, detailed lab notebook!
-
+I processed electric organ and/or skeletal muscle RNA-seq reads for a future differential gene expression analysis. I used existing tools for quality assessment and read trimming, compared quality assessments to those created by my own software, and aligned and counted reads. Additionally, I summarized important information in a high-level report. You should create a cohesive, [well written](https://drive.google.com/drive/u/0/folders/1GorpwubavrvhUtK18PZ7LURXcz0hf0bK) report for your "PI" about what you've learned about/from your data.
 
 ### Dataset:
 
-Each of you will be working with 2 RNA-seq files from two different electric fish studies (PRJNA1005245 and PRJNA1005244). The methods for the PRJNA1005244 dataset are [published](https://doi.org/10.1093/molbev/msae021) and the methods for the PRJNA1005245 dataset are written in the third chapter of a [thesis](https://canvas.uoregon.edu/courses/266187/files/22059308?module_item_id=5380118). For all steps below, process the two libraries separately. SRR assignments are here: ```/projects/bgmp/shared/Bi623/PS2/QAA_data_Assignments.txt```. If you have time, consider claiming and processing additional RNA-seq raw sequencing files via this [google doc](https://docs.google.com/document/d/1vEmVEzUaTjbDF4JyNsWH-wFpi8dm4wkcvWgSoYZzoCY/edit?usp=sharing). Although this is not extra credit, it will make our downstream RNA-seq analysis more interesting and your classmates will appreciate your efforts.
+I worked with 2 RNA-seq files from two different electric fish studies (PRJNA1005245 and PRJNA1005244). The methods for the PRJNA1005244 dataset are [published](https://doi.org/10.1093/molbev/msae021) and the methods for the PRJNA1005245 dataset are written in the third chapter of a [thesis](https://canvas.uoregon.edu/courses/266187/files/22059308?module_item_id=5380118). For all steps below, I processed the two libraries separately. SRR assignments are here: ```/projects/bgmp/shared/Bi623/PS2/QAA_data_Assignments.txt```. 
 
-You are responsible for downloading this data from NCBI SRA, dumping into FASTQ files, and zipping those files. We are processing this data for use in a future assignment, so please keep your files well organized. Finally, rename the files to reflect Species_sample_tissue_age/size_sample#_readnumber.fastq.gz.
-
-**Reminder: This template file IS not your final product; however, it gives you a space to record all of the necessary information for your final report.**
+I was responsible for downloading this data from NCBI SRA, dumping into FASTQ files, and zipping those files. Finally, I renamed the files to reflect Species_sample_tissue_age/size_sample#_readnumber.fastq.gz.
 
 ## Part 1 – Read quality score distributions
 
-1. Create a new conda environment called `QAA` and install `FastQC`, `cutadapt`, and `Trimmomatic`. Google around if you need a refresher on how to create conda environments. Recommend doing this in an interactive session, not the login node! Record details of how you created this environment in your lab notebook! Make sure you check your installation with:
+1. Created a new conda environment called `QAA` and install `FastQC`, `cutadapt`, and `Trimmomatic`. Did this in an interactive session, not the login node! Check your installation with:
    - `fastqc --version` (should be 0.12.1)  
 
-2. Using `FastQC` via the command line on Talapas, produce plots of the per-base quality score distributions for R1 and R2 reads. Also, produce plots of the per-base N content, and comment on whether or not they are consistent with the quality score plots.
+2. Using `FastQC` via the command line on Talapas, I produced plots of the per-base quality score distributions for R1 and R2 reads. Also, I produced plots of the per-base N content, and commented on whether or not they are consistent with the quality score plots.
 
-3. Run your quality score plotting script from your Demultiplexing assignment in Bi622. (Make sure you're using the "running sum" strategy!!) Describe how the `FastQC` quality score distribution plots compare to your own. If different, propose an explanation. Also, does the runtime differ? Mem/CPU usage? If so, why?
+3. I ran the quality score plotting script from my Demultiplexing project. I compared how the `FastQC` quality score distribution plots compared to my own.
 
-4. Comment on the overall data quality of your two libraries. Go beyond per-base qscore distributions. Examine the `FastQC` [documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/) for guidance on interpreting results and planning next steps. Make and justify a recommendation on whether these data are of high enough quality to use for further analysis. 
+4. Commented on the overall data quality of my two libraries. Examined the `FastQC` [documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/) for guidance on interpreting results and planning next steps.
 
 ## Part 2 – Adaptor trimming comparison
 
-5.  If you haven't already in your QAA environment, install `Cutadapt` and `Trimmomatic`. Check your installations with:
+5.  Install `Cutadapt` and `Trimmomatic`. Check installations with:
     - `cutadapt --version` (should be 5.0)
     - `trimmomatic -version` (should be 0.39)
 
-6. Using `Cutadapt`, properly trim adapter sequences from your assigned files. Be sure to read how to use `Cutadapt`. Use default settings. What proportion of reads (both R1 and R2) were trimmed?
+6. Using `Cutadapt`, I properly trimmed adapter sequences from my assigned files with default settings. What proportion of reads (both R1 and R2) were trimmed?
 
-    <details>
-    <summary>Try to determine what the adapters are on your own. If you cannot (or if you do, and want to confirm), click here to see the actual adapter sequences used.</summary>
-  
-    R1: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCA`
-    
-    R2: `AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT`
-    </details>
 
     - *Sanity check*: Use your Unix skills to search for the adapter sequences in your datasets and confirm the expected sequence orientations. Report the commands you used, the reasoning behind them, and how you confirmed the adapter sequences.
     
@@ -85,11 +72,7 @@ You are responsible for downloading this data from NCBI SRA, dumping into FASTQ 
 
 16. BONUS - Turn your commands from part 1 and 2 into a script with a loop going through your two SRA files
 
-## Bonus (optional!)
-
-Review the [publication](https://doi.org/10.1093/molbev/msae021) from PRJNA1005244 or the third chapter of the [thesis](https://canvas.uoregon.edu/courses/266187/files/22059308?module_item_id=5380118) for the PRJNA1005245 dataset. See if this information leads to any additional insight of your analysis.
-
-## Upload your:
+##Included are my:
 - [ ] lab notebook
 - [ ] Talapas batch script/code
 - [ ] FastQC plots
@@ -100,20 +83,8 @@ Review the [publication](https://doi.org/10.1093/molbev/msae021) from PRJNA10052
 to GitHub.
     
 ### Pdf report details
-You should create a pdf file (using Rmarkdown) with a high-level report including:
 
-- [ ] all requested plots
+- [ ] all plots
 - [ ] answers to questions
 - [ ] mapped/unmapped read counts from PS8 script (in a nicely formatted table)
-- [ ] It should be named `QAA_report.pdf`
-- [ ] Include at the top level of your repo
-- [ ] ALSO, submit it to Canvas.
-
-> [!TIP]
-> You may need to install LaTeX to knit your rmarkdown into a pdf file. Run `tinytex::install_tinytex()` to install it on R.
-   
-The three parts of the assignment should be clearly labeled. Be sure to title and write a descriptive figure caption for each image/graph/table you present. 
-
-> [!TIP]
-> Think about figure captions you've read and discussed in Journal Club. Find some good examples to model your captions on.
-
+- [ ] named `QAA_report.pdf`
